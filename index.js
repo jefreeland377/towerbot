@@ -62,7 +62,7 @@ client.on('message', message =>
 	} catch (error)
 	{
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		message.reply('Something went wrong! Pinging @definitely_not_HIM so they can sort it out.');
 	}
 });
 
@@ -102,7 +102,7 @@ function checkMessage(message)
 		else if (height != 0)
 		{
 			console.log('tower has toppled!');
-			collapseEmbed.description = 'The tower was ' + height + ' hand' + (height == 1 ? '' : 's') + ' tall.';
+			collapseEmbed.setDescription = 'The tower was ' + height + ' hand' + (height == 1 ? '' : 's') + ' tall.';
 			
 			const channel = (notifyChannel ? notifyChannel : towerChannel);
 			if (delay)

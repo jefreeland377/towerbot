@@ -13,7 +13,7 @@ module.exports =
 		{
 			data.push('Here\'s a list of all my commands:');
 			data.push(commands.map(command => command.name).join(', '));
-			data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command.`);
+			data.push(`\nYou can send \`${prefix}help <command name>\` to get info on a specific command.`);
 
 			return message.channel.send(data, { split: true })
 		}
@@ -24,7 +24,7 @@ module.exports =
 			
 			if (!command)
 			{
-				return message.reply('that\'s not a valid command!');
+				return message.reply('That\'s not a valid command!');
 			}
 			
 			data.push(`**Name:** ${command.name}`);

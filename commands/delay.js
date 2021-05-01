@@ -1,5 +1,3 @@
-const {pattern} = require('../config.json');
-
 module.exports =
 {
 	name: 'delay',
