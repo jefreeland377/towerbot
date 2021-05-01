@@ -53,7 +53,7 @@ client.on('message', message =>
 	
 	if (command.args && !args.length)
 	{
-		return message.channel.send('${message.author}, the proper usage is \`${prefix}${command.name} ${command.usage}\`');
+		return message.channel.send(`${message.author}, the proper usage is ${prefix}${command.name} ${command.usage}`);
 	}
 
 	try
@@ -118,7 +118,7 @@ function checkMessage(message)
 function sendDelayedMessage(message, channel)
 {
 	let schedule = new Date();
-	schedule.setSeconds(schedule.getSeconds() + 5);
+	schedule.setHours(schedule.getHours() + 12);
 	
 	let job = new CronJob(schedule, function(message)
 	{
