@@ -1,5 +1,3 @@
-const { process.env.prefix } = require('../config.json');
-
 module.exports =
 {
 	name: 'help',

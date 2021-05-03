@@ -1,5 +1,3 @@
-const {process.env.pattern} = require('../config.json');
-
 module.exports =
 {
 	name: 'settower',
