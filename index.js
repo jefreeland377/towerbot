@@ -100,7 +100,7 @@ function checkMessage(message)
 		else if (height != 0)
 		{
 			console.log('tower has toppled!');
-			collapseEmbed.setDescription('The tower was ' + height + ' hand' + (height == 1 ? '' : 's') + ' tall.');
+			collapseEmbed.description = 'The tower was ' + height + ' hand' + (height == 1 ? '' : 's') + ' tall.';
 			
 			const channel = (notifyChannel ? notifyChannel : towerChannel);
 			if (delay)
