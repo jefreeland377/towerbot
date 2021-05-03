@@ -1,4 +1,4 @@
-const {pattern} = require('../config.json');
+const {process.env.pattern} = require('../config.json');
 
 module.exports =
 {

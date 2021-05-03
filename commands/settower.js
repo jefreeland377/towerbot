@@ -1,4 +1,4 @@
-const {pattern} = require('../config.json');
+const {process.env.pattern} = require('../config.json');
 
 module.exports =
 {
@@ -34,7 +34,7 @@ module.exports =
 			channel.messages.fetch()
 			.then(messages =>
 			{
-				const filtered = messages.filter(fmsg => fmsg.content != pattern);
+				const filtered = messages.filter(fmsg => fmsg.content != process.env.pattern);
 				const culprit = filtered.first();
 				
 				const current = channel.messages.fetch({after: culprit.id})

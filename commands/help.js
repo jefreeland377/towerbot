@@ -1,4 +1,4 @@
-const { prefix } = require('../config.json');
+const { process.env.prefix } = require('../config.json');
 
 module.exports =
 {
@@ -13,7 +13,7 @@ module.exports =
 		{
 			data.push('Here\'s a list of all my commands:');
 			data.push(commands.map(command => command.name).join(', '));
-			data.push(`\nYou can send \`${prefix}help <command name>\` to get info on a specific command.`);
+			data.push(`\nYou can send \`${process.env.prefix}help <command name>\` to get info on a specific command.`);
 
 			return message.channel.send(data, { split: true })
 		}
@@ -29,7 +29,7 @@ module.exports =
 			
 			data.push(`**Name:** ${command.name}`);
 			if (command.description) data.push(`**Description:** ${command.description}`);
-			if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
+			if (command.usage) data.push(`**Usage:** ${process.env.prefix}${command.name} ${command.usage}`);
 			
 			message.channel.send(data, { split: true });
 		}
