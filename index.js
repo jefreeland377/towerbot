@@ -1,7 +1,6 @@
 const fs = require('fs');
 const CronJob = require('cron').CronJob;
 const Discord = require('discord.js');
-const { pattern, prefix, token } = require('./config.json');
 const collapseEmbed = require('./collapse-embed.js');
 
 let towerChannel;
@@ -43,9 +42,9 @@ client.on('message', message =>
 	}
 	
 	//then, handle commands
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (!message.content.startsWith(process.env.prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const args = message.content.slice(process.env.prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	
 	if (!client.commands.has(commandName)) return;
@@ -53,7 +52,7 @@ client.on('message', message =>
 	
 	if (command.args && !args.length)
 	{
-		return message.channel.send(`${message.author}, the proper usage is ${prefix}${command.name} ${command.usage}`);
+		return message.channel.send(`${message.author}, the proper usage is ${process.env.prefix}${command.name} ${command.usage}`);
 	}
 
 	try
@@ -94,7 +93,7 @@ function checkMessage(message)
 {
 	if (!message.author.bot)
 	{
-		if (message.content == pattern)
+		if (message.content == process.env.pattern)
 		{
 			height++;
 			console.log('height is now ' + height);
@@ -130,5 +129,5 @@ function sendDelayedMessage(message, channel)
 	console.log('delayed message scheduled for ' + schedule + ' in ' + channel);
 }
 
-// login to Discord with your app's token
-client.login(token);
+// login to Discord with your app's process.env.token
+client.login(process.env.token);
