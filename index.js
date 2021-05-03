@@ -95,8 +95,7 @@ function checkMessage(message)
 	{
 		if (message.content == process.env.pattern)
 		{
-			height++;
-			console.log('height is now ' + height);
+			client.emit('setHeight', height + 1);
 		}
 		else if (height != 0)
 		{
