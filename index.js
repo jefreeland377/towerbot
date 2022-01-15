@@ -1,6 +1,7 @@
 const fs = require('fs');
 const CronJob = require('cron').CronJob;
-const Discord = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
+const { token, pattern } = require('./config.json');
 const collapseEmbed = require('./collapse-embed.js');
 
 let towerChannel;
@@ -9,61 +10,27 @@ let delay;
 let height;
 
 // create a new Discord client
-const client = new Discord.Client();
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-//retrieve the list of commands
-client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles)
-{
+client.commands = new Collection();
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.data.name, command);
 }
 
-// when the client is ready, run this code
-// this event will only trigger one time after logging in
-client.once('ready', () =>
-{
-	towerChannel = null;
-	notifyChannel = null;
-	delay = false;
-	height = 0;
-	
-	console.log('Ready!\n');
-});
-
-client.on('message', message =>
-{
-	//first, handle tower messages
-	if (towerChannel != null)
-	{
-		if (message.channel == towerChannel)
-				checkMessage(message);
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
 	}
-	
-	//then, handle commands
-	if (!message.content.startsWith(process.env.prefix) || message.author.bot) return;
-
-	const args = message.content.slice(process.env.prefix.length).trim().split(/ +/);
-	const commandName = args.shift().toLowerCase();
-	
-	if (!client.commands.has(commandName)) return;
-	const command = client.commands.get(commandName);
-	
-	if (command.args && !args.length)
-	{
-		return message.channel.send(`${message.author}, the proper usage is ${process.env.prefix}${command.name} ${command.usage}`);
-	}
-
-	try
-	{
-		command.execute(message, args);
-	} catch (error)
-	{
-		console.error(error);
-		message.reply('Something went wrong! Pinging @definitely_not_HIM so they can sort it out.');
-	}
-});
+}
 
 client.on('setTower', newChannel =>
 {
@@ -93,7 +60,7 @@ function checkMessage(message)
 {
 	if (!message.author.bot)
 	{
-		if (message.content == process.env.pattern)
+		if (message.content == pattern)
 		{
 			client.emit('setHeight', height + 1);
 		}
@@ -128,5 +95,5 @@ function sendDelayedMessage(message, channel)
 	console.log('delayed message scheduled for ' + schedule + ' in ' + channel);
 }
 
-// login to Discord with your app's process.env.token
-client.login(process.env.token);
+// login to Discord with your app's token
+client.login(token);
