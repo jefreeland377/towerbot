@@ -15,7 +15,7 @@ module.exports =
 		} catch (error)
 		{
 			console.error(error);
-			return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+			return interaction.reply({ content: 'Whoops, something weird just happened. Pinging <@86612976529838080> to take a look at it.', ephemeral: true });
 		}
 	}
 }

@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "CC-BY-NC-SA-4.0",
   "dependencies": {
     "@discordjs/builders": "^0.11.0",
     "@discordjs/rest": "^0.2.0-canary.0",
@@ -17,7 +17,7 @@
     "discord.js": "^13.6.0"
   },
   "engines": {
-    "node": "v14.16.1",
-    "npm": "6.14.12"
+    "node": ">=14.16.1",
+    "npm": ">=6.14.12"
   }
 }
