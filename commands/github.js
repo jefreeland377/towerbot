@@ -8,5 +8,5 @@ module.exports =
 	async execute(interaction)
 	{
 		await interaction.reply('https://github.com/jefreeland377/towerbot');
-	}
-}
+	},
+};

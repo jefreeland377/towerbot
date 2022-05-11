@@ -3,3 +3,5 @@ logs
 *.env
 node_modules/
 config.json
+*.db
+*.sqlite
