@@ -1,4 +1,6 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+'use strict';
+
+const { SlashCommandBuilder, userMention } = require('@discordjs/builders');
 
 module.exports =
 {
@@ -7,6 +9,6 @@ module.exports =
 		.setDescription('Ping the bot.'),
 	async execute(interaction)
 	{
-		await interaction.reply('towerbot, by definitely_not_HIM#5832.');
+		await interaction.reply("towerbot, by " + userMention(86612976529838080) + ".");
 	},
 };

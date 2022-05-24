@@ -1,9 +1,11 @@
 'use strict';
 
+const { Towers } = require('../utils/dbinit.js');
+
 module.exports =
 {
 	name: 'interactionCreate',
-	execute(interaction)
+	async execute(interaction)
 	{
 		if (interaction.isCommand())
 			//handle command
@@ -22,11 +24,6 @@ module.exports =
 				console.error(error);
 				return interaction.reply('Whoops, something weird just happened. Pinging <@86612976529838080> to take a look at it.');
 			}
-		}
-		else
-			//not a command, check message if necessary
-		{
-			const query = Towers.findAll({attributes: ['channel_id'], where: {server_id: interaction.guildId}});
 		}
 	}
 }

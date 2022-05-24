@@ -5,13 +5,8 @@ const CronJob = require('cron').CronJob;
 const { Client, Collection, Intents } = require('discord.js');
 const { token, pattern } = require('./config.json');
 
-let towerChannel;
-let notifyChannel;
-let delay;
-let height;
-
 // create a new Discord client
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 client.commands = new Collection();

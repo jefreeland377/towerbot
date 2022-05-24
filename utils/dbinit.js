@@ -1,6 +1,6 @@
 'use strict';
 
-const { Sequelize, Op } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 let sequelize = new Sequelize('database', 'user', 'password', {
 		host: 'localhost',
@@ -21,7 +21,6 @@ let Towers = sequelize.define('Tower', {
 	},
 	pattern: Sequelize.STRING,
 	height: Sequelize.INTEGER,
-	delay: Sequelize.BOOLEAN,
 	}, {underscored: true});
 
 module.exports =
@@ -30,7 +29,7 @@ module.exports =
 
 	dbInit: async function ()
 	{
-		Towers.sync();
+		Towers.sync({ force: true });
 		console.log('Connection established with database.');
 	}
 }
